@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.book.BooksMenu;
+import org.example.loan.LoanMenu;
 import org.example.user.UsersMenu;
 import org.example.util.InputValidator;
 
@@ -18,8 +19,9 @@ public class LibraryMenu {
             System.out.println();
             System.out.println("Menu:");
             System.out.println("1. Users.");
-            System.out.println("2. Books");
-            System.out.println("3. Exit.");
+            System.out.println("2. Books.");
+            System.out.println("3. Loan.");
+            System.out.println("4. Exit.");
 
             int choose = InputValidator.getValidatedIntInput(scanner, "Choose an option: ");
 
@@ -32,6 +34,9 @@ public class LibraryMenu {
                     new BooksMenu();
                     break;
                 case 3:
+                    new LoanMenu();
+                    break;
+                case 4:
                     System.out.println();
                     System.out.println("See you later!");
                     isRunning = false;
