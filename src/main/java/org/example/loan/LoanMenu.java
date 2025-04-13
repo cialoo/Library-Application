@@ -15,9 +15,10 @@ public class LoanMenu{
                 System.out.println();
                 System.out.println("LoanMenu.");
                 System.out.println("1. Show all loans.");
-                System.out.println("2. Rent book.");
-                System.out.println("3. Return book.");
-                System.out.println("4. Exit.");
+                System.out.println("2. Show all loans for a given user.");
+                System.out.println("3. Rent book.");
+                System.out.println("4. Return book.");
+                System.out.println("5. Exit.");
 
                 int choose = InputValidator.getValidatedIntInput(scanner, "Choose an option: ");
 
@@ -29,13 +30,17 @@ public class LoanMenu{
                         break;
                     case 2:
                         System.out.println();
-                        rentBook();
+                        selectAllLoanForUser();
                         break;
                     case 3:
                         System.out.println();
-                        returnBook();
+                        rentBook();
                         break;
                     case 4:
+                        System.out.println();
+                        returnBook();
+                        break;
+                    case 5:
                         isRunning = false;
                         break;
                     default:
@@ -46,6 +51,13 @@ public class LoanMenu{
 
         private void selectAllLoan() {
             LoanManager.selectAllLoan();
+        }
+
+        private void selectAllLoanForUser() {
+            System.out.println("All loans for user:");
+            System.out.print("Enter user name:");
+            String userName = scanner.nextLine();
+            LoanManager.selectAllLoanForUser(userName);
         }
 
         private void rentBook() {

@@ -32,6 +32,40 @@ public class LoanManager {
 
     }
 
+    public static void selectAllLoanForUser(String userN) {
+        String sql = "SELECT u.id as userId, u.name as userName, l.book_id as bookId, b.title as bookTitle, l.loan_date as loanDate, l.return_date as returnDate FROM users u INNER JOIN loans l ON l.user_id = u.id INNER JOIN books b ON b.id = l.book_id WHERE u.name = ?";
+
+        try(Connection conn = DatabaseManager.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            System.out.println("User ID | User Name | Book ID | Book Title | Loan Date | Return Date");
+
+            pstmt.setString(1, userN);
+            ResultSet rs = pstmt.executeQuery();
+
+            boolean found = false;
+            while(rs.next()) {
+                found = true;
+                int userId = rs.getInt("userId");
+                String userName = rs.getString("userName");
+                int bookId = rs.getInt("bookId");
+                String bookTitle = rs.getString("bookTitle");
+                String loanDate = rs.getString("loanDate");
+                String returnDate = rs.getString("returnDate");
+
+                System.out.printf("%d | %s | %s | %s | %s |%s%n",
+                        userId, userName, bookId, bookTitle, loanDate, returnDate);
+            }
+
+            if (!found) {
+                System.out.println("Loans for user not found!");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error displaying loans for user: " + e.getMessage());
+        }
+    }
+
     static boolean isBookAvailable(int bookId) {
         String sql = "SELECT available FROM books where id = ?";
         boolean isAvailable = false;

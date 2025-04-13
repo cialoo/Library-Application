@@ -4,3 +4,5 @@ Java application with SQLite database. The application helps to manage the loan 
 Management of users and books. Searching, adding and deleting.
 ## Second commit
 Possibility to borrow and return books.
+## Third commit
+Possibility to find all loans for user.
